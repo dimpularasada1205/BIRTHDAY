@@ -1,0 +1,6 @@
+{
+  "name": "A Little Surprise for Hari ❤️",
+  "description": "A romantic and interactive birthday surprise website for Hari, featuring personal memories, glowing candles, love notes, and secret surprises.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
