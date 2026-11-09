@@ -1,4 +1,5 @@
 import { MemoryPhoto, LoveReason, OpenWhenEnvelope, LoveLetterContent } from '../types.ts';
+import { persistAllMemories, fetchAllMemories } from './firebase.ts';
 
 // Default curated romantic vector/gradient art for the memories placeholders
 // so it looks magnificent immediately without broken external images!
@@ -159,7 +160,6 @@ const STORAGE_KEYS = {
   PROGRESS: 'hari_bday_progress',
 };
 
-import { persistAllMemories, fetchAllMemories } from './firebase.ts';
 
 export function getStoredMemories(): MemoryPhoto[] {
   try {
