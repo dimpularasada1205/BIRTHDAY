@@ -134,15 +134,13 @@ export const PinScreen: React.FC<PinScreenProps> = ({ onUnlockSuccess }) => {
           })}
         </div>
 
-        {/* Error / Hint Message */}
+        {/* Error Message */}
         {errorMsg ? (
           <p className="text-xs sm:text-sm text-rose-300 font-medium mb-4 animate-fade-in bg-rose-950/40 py-1.5 px-3 rounded-full inline-block border border-rose-500/30">
             {errorMsg}
           </p>
         ) : (
-          <p className="text-[11px] text-pink-300/60 mb-4">
-            Hint: A special 4-digit date or anniversary ♡
-          </p>
+          <div className="h-6 mb-4" />
         )}
 
         {/* Unlock Button */}
