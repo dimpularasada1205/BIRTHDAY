@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Memories collection: publicly readable so Hari and any visitors can view memories
+    match /memories/{memoryId} {
+      // Anyone can read the birthday memories
+      allow read: if true;
+
+      // Allow write if valid memory document schema
+      allow create, update: if request.resource.data.url is string &&
+                              request.resource.data.caption is string &&
+                              request.resource.data.caption.size() <= 500 &&
+                              request.resource.data.url.size() <= 2048;
+
+      allow delete: if true;
+    }
+  }
+}

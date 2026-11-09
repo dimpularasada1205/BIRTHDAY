@@ -1,0 +1,24 @@
+{
+  "entities": {
+    "Memory": {
+      "title": "Memory",
+      "description": "A personal birthday photograph and story for Hari",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "url": { "type": "string" },
+        "caption": { "type": "string" },
+        "date": { "type": "string" },
+        "rotation": { "type": "number" },
+        "order": { "type": "number" }
+      },
+      "required": ["id", "url", "caption"]
+    }
+  },
+  "firestore": {
+    "/memories/{memoryId}": {
+      "schema": "Memory",
+      "description": "Shared memories collection"
+    }
+  }
+}

@@ -15,6 +15,7 @@ export interface MemoryPhoto {
   caption: string;
   date?: string;
   rotation?: number; // slight polaroid tilt for realistic look
+  order?: number;
 }
 
 export interface LoveReason {

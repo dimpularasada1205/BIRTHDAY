@@ -159,6 +159,8 @@ const STORAGE_KEYS = {
   PROGRESS: 'hari_bday_progress',
 };
 
+import { persistAllMemories, fetchAllMemories } from './firebase.ts';
+
 export function getStoredMemories(): MemoryPhoto[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.MEMORIES);
@@ -171,9 +173,26 @@ export function getStoredMemories(): MemoryPhoto[] {
 export function saveStoredMemories(memories: MemoryPhoto[]) {
   try {
     localStorage.setItem(STORAGE_KEYS.MEMORIES, JSON.stringify(memories));
+    // Asynchronously synchronize with persistent database & storage
+    persistAllMemories(memories).catch((err) => {
+      console.warn('Background cloud sync error:', err);
+    });
   } catch (e) {
     console.error('Storage error', e);
   }
+}
+
+export async function syncCloudMemories(): Promise<MemoryPhoto[]> {
+  try {
+    const cloud = await fetchAllMemories();
+    if (cloud && cloud.length > 0) {
+      localStorage.setItem(STORAGE_KEYS.MEMORIES, JSON.stringify(cloud));
+      return cloud;
+    }
+  } catch (e) {
+    console.warn('Failed to fetch from cloud:', e);
+  }
+  return getStoredMemories();
 }
 
 export function getStoredReasons(): LoveReason[] {
